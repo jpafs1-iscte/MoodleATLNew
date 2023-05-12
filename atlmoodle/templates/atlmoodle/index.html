@@ -94,15 +94,30 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link text-white">
-                                Products
+                            <a href="{% url 'atlmoodle:registo' %}" class="nav-link text-white">
+                                Registar
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link text-white">
-                                Customers
+                            <a href="{% url 'atlmoodle:loginpage' %}" class="nav-link text-white">
+                                Login
                             </a>
                         </li>
+                            {% if request.user.aluno %}
+                                <li>
+                                    <p class="nav-link text-white"> Username: {{ user.username }}</p>
+                                </li>
+                                <li>
+                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link text-white">
+                                    Logout
+                                </a>
+                                </li>
+                                <li>
+                                <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
+                                    Informação Pessoal
+                                </a>
+                                </li>
+                            {% endif %}
                     </ul>
                     <hr>
                     <div class="dropdown">
@@ -126,7 +141,7 @@
 
     <div class="column right" >
         {% block content %}
-        <h2>You Are home ya mothafucka</h2>
+        <h2>You are home</h2>
         <p>Some </p>
         {% endblock content %}
 

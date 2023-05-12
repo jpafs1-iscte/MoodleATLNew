@@ -30,60 +30,68 @@ def go_quizzes(request):
 
 # parte do login
 def registo(request):
-    if 'aluno-form' == 'POST':
-        try:
-            nome = request.POST.get('user')
-            password = request.POST.get('pass')
-            curso = request.POST.get('curso')
-            ano = request.POST.get('anoEscolar')
-            contacto = request.POST.get('contacto')
+    if request.method == 'POST':
+        print(request.POST['useraluno'])
+        if request.POST['useraluno'] != "":
+            try:
+                nome = request.POST.get('useraluno')
+                primeironome = request.POST.get('primeironome')
+                ultimonome = request.POST.get('ultimonome')
+                password = request.POST.get('pass')
+                ano = request.POST.get('anoEscolar')
+                contacto = request.POST.get('contacto')
 
-        except KeyError:
-            return render(request, 'atlmoodle/registerpage.html')
+            except KeyError:
+                return render(request, 'atlmoodle/registerpage.html')
 
-        if nome and password and curso and ano and contacto:
-            user = User.objects.create_user(nome, password)
-            user.save()
-            aluno = Aluno.objects.create(user=user, curso=curso, ano=ano, contacto=contacto)
-            aluno.save()
-            return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
+            if nome and primeironome and ultimonome and password and ano and contacto:
+                user = User.objects.create_user(username=nome, email=contacto, password=password, first_name=primeironome, last_name=ultimonome)
+                user.save()
+                aluno = Aluno.objects.create(user=user, anoEscolar=ano)
+                aluno.save()
+                return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
+            else:
+
+                return HttpResponseRedirect(reverse('atlmoodle:main_page'))
+
         else:
-            return HttpResponseRedirect(reverse('atlmoodle:registerpage'))
+            try:
+                nome = request.POST.get('usertutor')
+                primeironome = request.POST.get('primeironome')
+                ultimonome = request.POST.get('ultimonome')
+                password = request.POST.get('pass')
+                anomin = request.POST.get('anos_a_ensinar_min')
+                anomax = request.POST.get('anos_a_ensinar_max')
+                contacto = request.POST.get('contacto')
 
-    else:
-        try:
-            nome = request.POST.get('user')
-            password = request.POST.get('pass')
-            anomin = request.POST.get('anos_a_ensinar_min')
-            anomax = request.POST.get('anos_a_ensinar_max')
-            contacto = request.POST.get('contacto')
+            except KeyError:
+                return render(request, 'atlmoodle/registerpage.html')
 
-        except KeyError:
-            return render(request, 'atlmoodle/registerpage.html')
+            if nome and primeironome and ultimonome and password and anomin and anomax and contacto:
+                user = User.objects.create_user(nome, password)
+                user.save()
+                aluno = Aluno.objects.create(user=user, anomin=anomin, anomax=anomax, contacto=contacto)
+                aluno.save()
+                return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
+            else:
+                return HttpResponseRedirect(reverse('atlmoodle:main_page'))
 
-        if nome and password and anomin and anomax and contacto:
-            user = User.objects.create_user(nome, password)
-            user.save()
-            aluno = Aluno.objects.create(user=user, anomin=anomin, anomax=anomax, contacto=contacto)
-            aluno.save()
-            return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
-        else:
-            return HttpResponseRedirect(reverse('atlmoodle:registerpage'))
+    return render(request, 'atlmoodle/registerpage.html')
 
 
 def loginpage(request):
     if request.method == 'POST':
         try:
-            nome = request.POST.get('nome')
-            word = request.POST.get('word')
+            nome = request.POST.get('user')
+            password = request.POST.get('pass')
         except KeyError:
             return render(request, 'atlmoodle/loginpage.html')
 
-        if nome and word:
-            user = authenticate(username=nome, password=word)
+        if nome and password:
+            user = authenticate(username=nome, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('atlmoodle:index'))
+                return HttpResponseRedirect(reverse('atlmoodle:main_page'))
             else:
                 return HttpResponseRedirect(reverse('atlmoodle:registo'))
     else:
@@ -92,11 +100,11 @@ def loginpage(request):
 
 def logoutview(request):
     logout(request)
-    return HttpResponseRedirect(reverse('votacao:index'))
+    return HttpResponseRedirect(reverse('atlmoodle:main_page'))
 
 
 def personal(request):
-    return render(request, 'votacao/personal.html')
+    return render(request, 'atlmoodle:detalhe')
 
 
 def eliminar(request):
