@@ -1,0 +1,28 @@
+
+* {
+  box-sizing: border-box;
+}
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  margin-top: 89px;
+  height: 100vh; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  background-color:#aaa;
+  width: 17%;
+
+
+}
+
+.right {
+  background-color:#bbb;
+  width: 83%;
+
+}
+
+.theHeader{
+  background-color: #bbbbbb;
+
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choose Model</title>
+</head>
+<body>
+    <h1>Choose a Django Model</h1>
+
+    <form id="model-form">
+        <label for="model-select">Select a Model:</label>
+        <select id="model-select" name="model">
+            <option value="aluno">Aluno</option>
+            <option value="tutor">Tutor</option>
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="model-fields" style="display: none;">
+        <h2>Fill out the attributes</h2>
+
+        <div id="aluno-fields" style="display: none;">
+            <form id="aluno-form" action="/create-aluno" method="POST">
+                {% csrf_token %}
+                <label for="aluno-user">User:</label>
+                <input type="text" id="aluno-user" name="user">
+                <br>
+                <label for="aluno-curso">Curso:</label>
+                <input type="text" id="aluno-curso" name="curso">
+                <br>
+                <label for="aluno-nr-votos">Nr Votos:</label>
+                <input type="number" id="aluno-nr-votos" name="nr_votos">
+                <br>
+                <label for="aluno-image">Image:</label>
+                <input type="text" id="aluno-image" name="image">
+                <br>
+                <label for="aluno-anoEscolar">Ano Escolar:</label>
+                <input type="number" id="aluno-anoEscolar" name="anoEscolar">
+                <br>
+                <label for="aluno-contacto">Contacto:</label>
+                <input type="number" id="aluno-contacto" name="contacto">
+                <br>
+                <input type="submit" value="Create Aluno">
+            </form>
+        </div>
+
+        <div id="tutor-fields" style="display: none;">
+            <form id="tutor-form" action="/create-tutor" method="POST">
+                {% csrf_token %}
+                <label for="tutor-user">User:</label>
+                <input type="text" id="tutor-user" name="user">
+                <br>
+                <label for="tutor-anos-min">Anos a Ensinar (Min):</label>
+                <input type="number" id="tutor-anos-min" name="anos_a_ensinar_min">
+                <br>
+                <label for="tutor-anos-max">Anos a Ensinar (Max):</label>
+                <input type="number" id="tutor-anos-max" name="anos_a_ensinar_max">
+                <br>
+                <label for="tutor-contacto">Contacto:</label>
+                <input type="number" id="tutor-contacto" name="contacto">
+                <br>
+                <input type="submit" value="Create Tutor">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('model-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var modelSelect = document.getElementById('model-select');
+            var selectedModel = modelSelect.value;
+
+            var modelFields = document.getElementById('model-fields');
+            var alunoFields = document.getElementById('aluno-fields');
+            var tutorFields = document.getElementById('tutor-fields');
+
+            if (selectedModel === 'aluno') {
+                alunoFields.style.display = 'block';
+                tutorFields.style.display = 'none';
+            } else if (selectedModel === 'tutor') {
+                alunoFields.style.display = 'none';
+                tutorFields.style.display = 'block';
+            }
+
+            modelFields.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

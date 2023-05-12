@@ -1,0 +1,27 @@
+{#Criar os blocos necessários#}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+<h1>Aluno Details</h1>
+    {% if aluno %}
+        <ul>
+            <li><strong>User:</strong> {{ aluno.user }}</li>
+            <li><strong>Curso:</strong> {{ aluno.curso }}</li>
+            <li><strong>Number of Votes:</strong> {{ aluno.nr_votos }}</li>
+            <li><strong>Image:</strong> {{ aluno.image }}</li>
+            <li><strong>Ano Escolar:</strong> {{ aluno.anoEscolar }}</li>
+            <li><strong>Contacto:</strong> {{ aluno.contacto }}</li>
+        </ul>
+    {% else %}
+        <p>No aluno found with the specified ID.</p>
+    {% endif %}
+</table>
+</body>
+</html>

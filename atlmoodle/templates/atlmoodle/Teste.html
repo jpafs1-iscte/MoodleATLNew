@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="row">
+
+
+    {% block header %}
+        <header class="p-3 mb-3 border-bottom">
+
+            {% load static %}
+
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+                        <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
+                        <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
+                        <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </header>
+
+    {% endblock header %}
+    </div>
+
+    <div class="row">
+        <div class=" scrollit">
+            {% block sidebar %}
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-4">Sidebar</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" aria-current="page">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                Products
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                Customers
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                            <strong>mdo</strong>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+        {% endblock sidebar %}
+        </div>
+    <div class="col-sm">
+<body class="d-flex flex-column h-100" >
+
+
+
+
+    {% block content %}
+        <div>
+            <h1>Fuck off</h1>
+            <p>Here you can suck my dick.</p>
+        </div>
+    {% endblock content %}
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+</body>
+    </div>
+    </div>
+    <div class="row fixed-bottom">
+    {% block footer %}
+        <footer class="footer mt-auto py-3 bg-dark">
+            <div class="container text-light">
+
+                <p>Contact: Please Dont</p>
+                <p>Email: PaiDoAfonsoEnsina@umMail.com</p>
+                <p>Phone: 123-456-7890</p>
+
+            </div>
+        </footer>
+
+    {% endblock footer %}
+    </div>
+
+
+
+</div>
