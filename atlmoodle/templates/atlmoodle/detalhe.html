@@ -10,18 +10,20 @@
 <body>
 <table>
 <h1>Aluno Details</h1>
-    {% if aluno %}
-        <ul>
-            <li><strong>User:</strong> {{ aluno.user }}</li>
-            <li><strong>Curso:</strong> {{ aluno.curso }}</li>
-            <li><strong>Number of Votes:</strong> {{ aluno.nr_votos }}</li>
-            <li><strong>Image:</strong> {{ aluno.image }}</li>
-            <li><strong>Ano Escolar:</strong> {{ aluno.anoEscolar }}</li>
-            <li><strong>Contacto:</strong> {{ aluno.contacto }}</li>
-        </ul>
-    {% else %}
-        <p>No aluno found with the specified ID.</p>
-    {% endif %}
+        {% if request.user.aluno %}
+            <ul>
+                <li><strong>User:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</li>
+                <li><strong>Ano Escolar:</strong> {{ request.user.aluno.anoEscolar }}</li>
+                <li><strong>Contacto:</strong> {{ request.user.email }}</li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><strong>User:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</li>
+                <li><strong>Anos a lecionar:</strong> {{ request.tutor.anos_a_ensinar_min }} {{ tutor.anos_a_ensinar_max }}</li>
+                <li><strong>Contacto:</strong> {{ request.user.email }}</li>
+            </ul>
+        {% endif %}
+    <a href="{% url 'atlmoodle:main_page' %}">Voltar a página principal</a>
 </table>
 </body>
 </html>

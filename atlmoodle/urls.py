@@ -20,6 +20,6 @@ urlpatterns = [
     path('eliminar', atlmoodle.views.eliminar, name='eliminar'),
     path('loginpage', atlmoodle.views.loginpage, name='loginpage'),
     path('logoutview', atlmoodle.views.logoutview, name='logoutview'),
-    path('detalhe', atlmoodle.views.personal, name="detalhe")
+    path('detalhe', atlmoodle.views.detalhe, name="detalhe")
 
 ]

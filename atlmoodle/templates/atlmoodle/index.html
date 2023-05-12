@@ -48,10 +48,23 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+                        <li><a href="{% url 'atlmoodle:registo' %}" class="nav-link px-2 link-dark" style="float: right">Registar</a></li>
+                        <li><a href="{% url 'atlmoodle:loginpage' %}" class="nav-link px-2 link-dark" style="float: right">Login</a></li>
+                            {% if request.user.aluno or request.user.tutor %}
+                                <li>
+                                    <a class="nav-link px-2 link-dark" style="float: right"> Username: {{ user.username }}</a>
+                                </li>
+                                <li>
+                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 link-dark" style="float: right">
+                                    Logout
+                                </a>
+                                </li>
+                                <li>
+                                <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 link-dark" style="float: right">
+                                    Informação Pessoal
+                                </a>
+                                </li>
+                            {% endif %}
                     </ul>
 
                 </div>
@@ -93,31 +106,31 @@
                                 Orders
                             </a>
                         </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:registo' %}" class="nav-link text-white">
-                                Registar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:loginpage' %}" class="nav-link text-white">
-                                Login
-                            </a>
-                        </li>
-                            {% if request.user.aluno %}
-                                <li>
-                                    <p class="nav-link text-white"> Username: {{ user.username }}</p>
-                                </li>
-                                <li>
-                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link text-white">
-                                    Logout
-                                </a>
-                                </li>
-                                <li>
-                                <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
-                                    Informação Pessoal
-                                </a>
-                                </li>
-                            {% endif %}
+{#                        <li>#}
+{#                            <a href="{% url 'atlmoodle:registo' %}" class="nav-link text-white">#}
+{#                                Registar#}
+{#                            </a>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <a href="{% url 'atlmoodle:loginpage' %}" class="nav-link text-white">#}
+{#                                Login#}
+{#                            </a>#}
+{#                        </li>#}
+{#                            {% if request.user.aluno or request.user.tutor %}#}
+{#                                <li>#}
+{#                                    <a class="nav-link text-white"> Username: {{ user.username }}</a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link text-white">#}
+{#                                    Logout#}
+{#                                </a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">#}
+{#                                    Informação Pessoal#}
+{#                                </a>#}
+{#                                </li>#}
+{#                            {% endif %}#}
                     </ul>
                     <hr>
                     <div class="dropdown">

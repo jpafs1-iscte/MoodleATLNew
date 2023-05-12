@@ -15,9 +15,9 @@ def index(request):
     return render(request, 'atlmoodle/index.html')
 
 
-def detalhe(request, aluno_id):
-    aluno = get_object_or_404(Aluno, pk=aluno_id)
-    return render(request, 'atlmoodle/detalhe.html', {'aluno': aluno})
+# def detalhe(request, aluno_id):
+#     aluno = get_object_or_404(Aluno, pk=aluno_id)
+#     return render(request, 'atlmoodle/detalhe.html', {'aluno': aluno})
 
 
 def main_page(request):
@@ -68,9 +68,9 @@ def registo(request):
                 return render(request, 'atlmoodle/registerpage.html')
 
             if nome and primeironome and ultimonome and password and anomin and anomax and contacto:
-                user = User.objects.create_user(nome, password)
+                user = User.objects.create_user(username=nome, email=contacto, password=password, first_name=primeironome, last_name=ultimonome)
                 user.save()
-                aluno = Aluno.objects.create(user=user, anomin=anomin, anomax=anomax, contacto=contacto)
+                aluno = Aluno.objects.create(user=user, anomin=anomin, anomax=anomax)
                 aluno.save()
                 return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
             else:
@@ -103,8 +103,8 @@ def logoutview(request):
     return HttpResponseRedirect(reverse('atlmoodle:main_page'))
 
 
-def personal(request):
-    return render(request, 'atlmoodle:detalhe')
+def detalhe(request):
+    return render(request, 'atlmoodle/detalhe.html')
 
 
 def eliminar(request):
