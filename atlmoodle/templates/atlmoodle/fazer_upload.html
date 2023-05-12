@@ -1,19 +1,27 @@
+{% extends "atlmoodle/index.html" %}
 {% load static %}
- <form method="post" enctype="multipart/form-data" action="{% url 'atlmoodle:fazer_upload' %}">
-     {% csrf_token %}
-      <input type="file" name="myfile">
-      <input type="submit" value="Upload">
- </form>
-{% if uploaded_file_url %}
- <p>
-     Feito o upload para:
-     <a href="{{ uploaded_file_url }}">
-        {{ uploaded_file_url }}
-     </a>
-</p>
- {% endif %}
- <p>
-    <a href="{% url 'atlmoodle:index' %}">
-        Voltar ao início
-    </a>
- </p>
+{% block content %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'atlmoodle:fazer_upload' %}">
+        {% csrf_token %}
+        <input type="file" name="myfile">
+        <input type="submit" value="Upload">
+    </form>
+    {% if uploaded_file_url %}
+        <p>
+            Feito o upload para:
+            <a href="{{ uploaded_file_url }}">
+                {{ uploaded_file_url }}
+            </a>
+        </p>
+        <li>
+            <a href="{{ uploaded_file_url }}" download>
+                Download do ficheiro
+            </a>
+        </li>
+    {% endif %}
+    <p>
+        <a href="{% url 'atlmoodle:main_page' %}">
+            Voltar ao início
+        </a>
+    </p>
+{% endblock content %}

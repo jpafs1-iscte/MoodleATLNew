@@ -132,8 +132,6 @@ def fazer_upload(request):
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
-        request.user.aluno.add_image("/atlmoodle/static/atlmoodle/images/" + filename)
-        print(request.user.aluno.image)
         uploaded_file_url = fs.url(filename)
         return render(request, 'atlmoodle/fazer_upload.html',
                       {'uploaded_file_url': uploaded_file_url})
