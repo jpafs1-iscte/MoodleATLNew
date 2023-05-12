@@ -1,0 +1,20 @@
+{% extends "atlmoodle/index.html" %}
+{% load static %}
+{% block content %}
+<body>
+<h1> Calendário de Eventos</h1>
+{% if events %}
+<ul>
+    {% for e in events %}
+        <li>
+            <a href="{% url 'atlmoodle:calendar_details' e.id %}">{{ e.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>Nao ha eventos disponiveis.</p>
+{% endif %}
+
+<a href="{% url 'atlmoodle:eventCreator' %}"> Criar Evento</a>
+</body>
+{% endblock content %}

@@ -21,7 +21,31 @@ class Tutor(models.Model):
     def __str__(self):
         return self.user.username
 
+class forum(models.Model):
+    topic = models.CharField(max_length=300)
+    description = models.TextField(blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
+    def __str__(self):
+        return str(self.topic)
+
+
+# child model
+class Discussion(models.Model):
+    forum = models.ForeignKey(forum, blank=True, on_delete=models.CASCADE)
+    discuss = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return str(self.forum)
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField('data de publicação')
+
+    def __str__(self):
+        return self.name
 
 
 

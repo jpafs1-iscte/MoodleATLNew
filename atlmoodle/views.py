@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from .models import Aluno
+
+from .forms import CreateInForum, CreateInDiscussion
+from .models import Aluno, Event, forum
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
@@ -140,3 +142,63 @@ def fazer_upload(request):
 
 def teste(request):
     return render(request, 'atlmoodle/teste.html')
+
+def home(request):
+    forums = forum.objects.all()
+    count = forums.count()
+    discussions = []
+    for i in forums:
+        discussions.append(i.discussion_set.all())
+
+    context = {'forums': forums,
+               'count': count,
+               'discussions': discussions}
+    return render(request, 'atlmoodle/forum/Forum.html', context)
+
+
+def addInForum(request):
+    form = CreateInForum()
+    if request.method == 'POST':
+        form = CreateInForum(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    return render(request, 'atlmoodle/forum/addForum.html', context)
+
+
+def addInDiscussion(request):
+    form = CreateInDiscussion()
+    if request.method == 'POST':
+        form = CreateInDiscussion(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    return render(request, 'atlmoodle/forum/discussion.html', context)
+
+def calendar(request):
+    data = {
+        "events": Event.objects.all,
+    }
+    return render(request, "atlmoodle/Calendar/Calendar.html", data)
+
+def calendar_details(request, event_id):
+    evento = get_object_or_404(Event, pk=event_id)
+    return render(request, 'atlmoodle/Calendar/CalendarDetails.html', {'evento': evento})
+
+def eventCreator(request):
+    if request.method == 'POST':
+        try:
+            event_name = request.POST.get("name")
+            event_description = request.POST.get("description")
+        except KeyError:
+            return render(request, 'atlmoodle/Calendar/CreateEvent.html')
+        if event_name and event_description:
+            evento = Event(name=event_name, description=event_description, created_at=timezone.now())
+            evento.save()
+            return HttpResponseRedirect(reverse('atlmoodle:calender_details', args=(evento.id,)))
+        else:
+            return HttpResponseRedirect(reverse('atlmoodle:eventCreator'))
+    else:
+        return render(request, 'atlmoodle/Calendar/CreateEvent.html')

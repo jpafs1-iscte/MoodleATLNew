@@ -12,14 +12,16 @@ urlpatterns = [
 
     path('', atlmoodle.views.main_page, name='main_page'),
     path('go_quizzes', include('quizzes.urls', namespace='quizzes')),
-    # path('forum', atlmoodle.views.forum, name="forum"),
-    # path('criarPost', atlmoodle.views.criarPost, name="criarpost"),
-    path('<int:thread_id>', atlmoodle.views.detalhe, name="detalhe"),
     path('registo', atlmoodle.views.registo, name="registo"),
-    # path('eliminarpost', atlmoodle.views.eliminarPost, name='eliminarPost'),
     path('eliminar', atlmoodle.views.eliminar, name='eliminar'),
     path('loginpage', atlmoodle.views.loginpage, name='loginpage'),
     path('logoutview', atlmoodle.views.logoutview, name='logoutview'),
-    path('detalhe', atlmoodle.views.detalhe, name="detalhe")
+    path('detalhe', atlmoodle.views.detalhe, name="detalhe"),
+    path('home', atlmoodle.views.home, name='home'),
+    path('addInForum/',atlmoodle.views.addInForum,name='addInForum'),
+    path('addInDiscussion/',atlmoodle.views.addInDiscussion,name='addInDiscussion'),
+    path('calendar', atlmoodle.views.calendar, name="calendar"),
+    path('<int:event_id>', atlmoodle.views.calendar_details, name="calendar_details"),
+    path('eventCreator', atlmoodle.views.eventCreator, name="eventCreator"),
 
 ]

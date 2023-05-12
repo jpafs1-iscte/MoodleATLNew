@@ -1,0 +1,17 @@
+{% extends "atlmoodle/index.html" %}
+{% load static %}
+{% block content %}
+<body>
+<h1> Criar Evento</h1>
+<form action="{% url 'atlmoodle:eventCreator' %}" method="post">
+    {% csrf_token %}
+    <label for="name">Evento: </label>
+    <input id="name" type="text" name="name">
+    <br/>
+    <label for="description">Descrição: </label>
+    <textarea id="description" name="description"></textarea>
+    <br/>
+    <input type="submit" value="Criar novo evento">
+</form>
+</body>
+{% endblock content %}
