@@ -3,6 +3,9 @@
 {% block content %}
     <form method="post" enctype="multipart/form-data" action="{% url 'atlmoodle:fazer_upload' %}">
         {% csrf_token %}
+        <label for="name">Evento: </label>
+        <input id="name" type="text" name="name">
+        <br/>
         <input type="file" name="myfile">
         <input type="submit" value="Upload">
     </form>
@@ -13,11 +16,6 @@
                 {{ uploaded_file_url }}
             </a>
         </p>
-        <li>
-            <a href="{{ uploaded_file_url }}" download>
-                Download do ficheiro
-            </a>
-        </li>
     {% endif %}
     <p>
         <a href="{% url 'atlmoodle:main_page' %}">

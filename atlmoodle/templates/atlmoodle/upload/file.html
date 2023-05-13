@@ -1,0 +1,18 @@
+{% extends "atlmoodle/index.html" %}
+{% load static %}
+{% block content %}
+    <body>
+    <h1> Ficheiros</h1>
+    {% if uploaded_files %}
+        <ul>
+            {% for uploaded_file in uploaded_files %}
+                <li><a href="{{ uploaded_file.file.url }}">{{ uploaded_file.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nao ha ficheiros disponiveis.</p>
+    {% endif %}
+
+    <a href="{% url 'atlmoodle:fazer_upload' %}"> Dar upload de ficheiro</a>
+    </body>
+{% endblock content %}

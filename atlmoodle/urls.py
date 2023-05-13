@@ -24,5 +24,5 @@ urlpatterns = [
     path('<int:event_id>', atlmoodle.views.calendar_details, name="calendar_details"),
     path('eventCreator', atlmoodle.views.eventCreator, name="eventCreator"),
     path('upload', atlmoodle.views.fazer_upload, name="fazer_upload"),
-
+    path('file', atlmoodle.views.file, name="file"),
 ]
