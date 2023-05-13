@@ -5,7 +5,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 
 from .forms import CreateInForum, CreateInDiscussion
-from .models import Aluno, Tutor, Event, forum
+from .models import Aluno, Tutor, Event, forum, UploadedFile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
@@ -124,6 +124,11 @@ def eliminar(request):
         # voltar para a página web anterior.
     return HttpResponseRedirect(reverse('votacao:index'))
 
+def file(request):
+    data = {
+        "uploaded_files": UploadedFile.objects.all()
+    }
+    return render(request, "atlmoodle/Calendar/Calendar.html", data)
 
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -131,8 +136,13 @@ def fazer_upload(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
+        name = request.POST.get('name')
+        uploaded_file = UploadedFile(name=name, file=myfile)
+        uploaded_file.save()
+        uploaded_files = UploadedFile.objects.all()
         return render(request, 'atlmoodle/fazer_upload.html',
-                      {'uploaded_file_url': uploaded_file_url})
+                      {'uploaded_file_url': uploaded_file_url,
+                       'uploaded_files': uploaded_files})
     return render(request, 'atlmoodle/fazer_upload.html')
 
 
