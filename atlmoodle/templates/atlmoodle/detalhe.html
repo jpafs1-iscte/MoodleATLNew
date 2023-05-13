@@ -1,5 +1,5 @@
 {#Criar os blocos necessários#}
-
+{% extends "atlmoodle/index.html" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,22 +8,46 @@
     <title>Title</title>
 </head>
 <body>
-<table>
-<h1>Aluno Details</h1>
+{% block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h1>Aluno Details</h1>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
         {% if request.user.aluno %}
-            <ul>
-                <li><strong>User:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</li>
-                <li><strong>Ano Escolar:</strong> {{ request.user.aluno.anoEscolar }}</li>
-                <li><strong>Contacto:</strong> {{ request.user.email }}</li>
-            </ul>
+        <tr>
+            <td><strong>User:</strong></td>
+            <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Ano Escolar:</strong></td>
+            <td>{{ request.user.aluno.anoEscolar }}</td>
+        </tr>
+        <tr>
+            <td><strong>Contacto:</strong></td>
+            <td>{{ request.user.email }}</td>
+        </tr>
         {% else %}
-            <ul>
-                <li><strong>User:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</li>
-                <li><strong>Anos a lecionar:</strong> {{ request.tutor.anos_a_ensinar_min }} {{ tutor.anos_a_ensinar_max }}</li>
-                <li><strong>Contacto:</strong> {{ request.user.email }}</li>
-            </ul>
+        <tr>
+            <td><strong>User:</strong></td>
+            <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Anos a lecionar:</strong></td>
+            <td>{{ request.tutor.anos_a_ensinar_min }} {{ tutor.anos_a_ensinar_max }}</td>
+        </tr>
+        <tr>
+            <td><strong>Contacto:</strong></td>
+            <td>{{ request.user.email }}</td>
+        </tr>
         {% endif %}
-    <a href="{% url 'atlmoodle:main_page' %}">Voltar a página principal</a>
+    </tbody>
 </table>
+{% endblock content %}
 </body>
 </html>

@@ -41,7 +41,7 @@
 
     {% block header %}
         {% load static %}
-        <header class="p-4 border-bottom theHeader" >
+        <header class="p-4 border-bottom " >
 
             {% load static %}
 
@@ -49,13 +49,13 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Overview</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Inventory</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Customers</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Products</a></li>
                     </ul>
                     <div>
-                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2">{{ request.user.first_name }} {{ request.user.email }}</a>
+                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-white">{{ request.user.first_name }} algo{{ request.user.email }}</a>
                     </div>
                 </div>
 
