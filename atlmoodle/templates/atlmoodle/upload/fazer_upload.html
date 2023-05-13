@@ -1,25 +1,71 @@
 {% extends "atlmoodle/index.html" %}
 {% load static %}
+
+{% block sidebar %}
+     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-4">Sidebar</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="{% url 'atlmoodle:main_page' %}" class="nav-link text-white" aria-current="page" >
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link text-white" >
+                                Quizzes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:fazer_upload' %}" class="nav-link active">
+                                Upload de testes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
+                                Detalhes
+                            </a>
+                        </li>
+                        <li>
+                            </a>
+                            <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
+                                Calendário de Eventos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
+                                Forum
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+{% endblock sidebar %}
+
+
+
 {% block content %}
-    <form method="post" enctype="multipart/form-data" action="{% url 'atlmoodle:fazer_upload' %}">
-        {% csrf_token %}
-        <label for="name">Evento: </label>
-        <input id="name" type="text" name="name">
-        <br/>
-        <input type="file" name="myfile">
-        <input type="submit" value="Upload">
-    </form>
-    {% if uploaded_file_url %}
-        <p>
-            Feito o upload para:
-            <a href="{{ uploaded_file_url }}">
-                {{ uploaded_file_url }}
-            </a>
-        </p>
-    {% endif %}
-    <p>
-        <a href="{% url 'atlmoodle:main_page' %}">
-            Voltar ao início
-        </a>
-    </p>
+   <form method="post" enctype="multipart/form-data" action="{% url 'atlmoodle:fazer_upload' %}">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="name">Evento:</label>
+    <input id="name" type="text" name="name" class="form-control" style="max-width: 60%">
+  </div>
+  <div class="form-group">
+    <label for="myfile">Arquivo:</label>
+    <input type="file" name="myfile" class="form-control-file ">
+  </div>
+  <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+{% if uploaded_file_url %}
+  <p>Feito o upload para:
+    <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+  </p>
+{% endif %}
+
+
 {% endblock content %}

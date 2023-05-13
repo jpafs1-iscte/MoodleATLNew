@@ -49,18 +49,18 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="{% url 'atlmoodle:registo' %}" class="nav-link px-2 link-dark" style="float: right">Registar</a></li>
-                        <li><a href="{% url 'atlmoodle:loginpage' %}" class="nav-link px-2 link-dark" style="float: right">Login</a></li>
+                        <li><a href="{% url 'atlmoodle:registo' %}" class="nav-link px-2 text-light" style="float: right">Registar</a></li>
+                        <li><a href="{% url 'atlmoodle:loginpage' %}" class="nav-link px-2 text-light" style="float: right">Login</a></li>
                             {% if request.user.aluno or request.user.tutor %}
                                 <li>
-                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 link-dark" style="float: right">
+                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 text-light" style="float: right">
                                     Logout
                                 </a>
                                 </li>
                             {% endif %}
                     </ul>
                     <div>
-                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-white">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
+                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-light">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
                     </div>
                 </div>
 
@@ -105,16 +105,14 @@
                         </li>
                         <li>
                             <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
-                                Detalhe?
+                                Detalhes
                             </a>
                         </li>
                         <li>
                             </a>
-                            <br/>
                             <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
                                 Calendário de Eventos
                             </a>
-                            <br/>
                             <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
                                 Forum
                             </a>
@@ -130,14 +128,14 @@
 
     <div class="column right bg-light" >
         {% block content %}
-        <h2>You Are home ya mothafucka</h2>
-        <p>Some </p>
+        <h2>This is Home</h2>
+        <p>Home is a good place </p>
         {% endblock content %}
 
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
 <div class="row">

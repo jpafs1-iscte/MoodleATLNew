@@ -1,17 +1,69 @@
 {% extends "atlmoodle/index.html" %}
 {% load static %}
+{% block sidebar %}
+     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-4">Sidebar</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="{% url 'atlmoodle:main_page' %}" class="nav-link text-white" aria-current="page" >
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link text-white" >
+                                Quizzes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:fazer_upload' %}" class="nav-link text-white">
+                                Upload de testes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
+                                Detalhes
+                            </a>
+                        </li>
+                        <li>
+                            </a>
+                            <a href="{% url 'atlmoodle:calendar' %}" class="nav-link active">
+                                Calendário de Eventos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
+                                Forum
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+{% endblock sidebar %}
 {% block content %}
 <body>
-<h1> Criar Evento</h1>
-<form action="{% url 'atlmoodle:eventCreator' %}" method="post">
-    {% csrf_token %}
-    <label for="name">Evento: </label>
-    <input id="name" type="text" name="name">
-    <br/>
-    <label for="description">Descrição: </label>
-    <textarea id="description" name="description"></textarea>
-    <br/>
-    <input type="submit" value="Criar novo evento">
-</form>
+<body>
+  <div class="container">
+    <h1>Criar Evento</h1>
+
+    <form action="{% url 'atlmoodle:eventCreator' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name">Evento:</label>
+        <input id="name" type="text" name="name" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descrição:</label>
+        <textarea id="description" name="description" class="form-control"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Criar novo evento</button>
+    </form>
+  </div>
 </body>
+
 {% endblock content %}

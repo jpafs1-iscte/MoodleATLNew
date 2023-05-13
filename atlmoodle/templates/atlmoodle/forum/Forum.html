@@ -13,6 +13,49 @@
         }
     </style>
 </head>
+{% block sidebar %}
+     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-4">Sidebar</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="{% url 'atlmoodle:main_page' %}" class="nav-link text-white" aria-current="page" >
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link text-white" >
+                                Quizzes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:fazer_upload' %}" class="nav-link text-white">
+                                Upload de testes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
+                                Detalhes
+                            </a>
+                        </li>
+                        <li>
+                            </a>
+                            <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
+                                Calendário de Eventos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'atlmoodle:home' %}" class="nav-link active">
+                                Forum
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+{% endblock sidebar %}
 {% block content %}
 <body>
 <h2 class="jumbotron">
@@ -23,12 +66,14 @@
     </form>
 </h2>
 
+<div style="border:1px solid black;width:150vh;height:60vh;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
+
 <div class="card-columns" style="padding: 10px; margin: 20px;"></div>
 
 
 {%for forum in forums %}
 
-    <div class="card box container" style="margin-bottom: 2000px">
+    <div class="card box container" style="margin-bottom: 20px">
         <br>
         <h5 class="card-title">
             <a><h3>{{forum.topic}}</h3></a>
@@ -53,6 +98,7 @@
             <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Responder</button>
         </form>
     </div>
+
     <br>
 
 {%endfor%}
@@ -60,5 +106,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</div>
 </body>
 {% endblock content %}

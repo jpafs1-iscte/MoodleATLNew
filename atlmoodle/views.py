@@ -140,10 +140,10 @@ def fazer_upload(request):
         uploaded_file = UploadedFile(name=name, file=myfile)
         uploaded_file.save()
         uploaded_files = UploadedFile.objects.all()
-        return render(request, 'atlmoodle/fazer_upload.html',
+        return render(request, 'atlmoodle/upload/fazer_upload.html',
                       {'uploaded_file_url': uploaded_file_url,
                        'uploaded_files': uploaded_files})
-    return render(request, 'atlmoodle/fazer_upload.html')
+    return render(request, 'atlmoodle/upload/fazer_upload.html')
 
 
 def teste(request):

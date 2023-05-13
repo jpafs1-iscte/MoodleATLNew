@@ -2,24 +2,80 @@
 <html>
 <head>
     <title>Choose Model</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+
+
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        select, input[type="text"], input[type="email"], input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .center{
+            margin: auto;
+            width: 50%;
+
+        }
+        #model-fields {
+            margin-top: 20px;
+        }
+
+        #aluno-fields, #tutor-fields {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #model-fields h2 {
+            margin-top: 0;
+        }
+    </style>
 </head>
 <body>
+<div class="center">
     <h1>Choose a Django Model</h1>
 
-    <form id="model-form">
+    <form id="model-form" >
         <label for="model-select">Select a Model:</label>
         <select id="model-select" name="model">
+            <option value="#">-----</option>
             <option value="aluno">Aluno</option>
             <option value="tutor">Tutor</option>
         </select>
 
-        <input type="submit" value="Submit">
     </form>
+</div>
 
-    <div id="model-fields" style="display: none;">
-        <h2>Fill out the attributes</h2>
+    <div id="model-fields" class="center">
 
-        <div id="aluno-fields" style="display: none;">
+
+        <div id="aluno-fields">
+            <h2>Fill out the attributes</h2>
             <form id="aluno-form" action="{% url 'atlmoodle:registo'  %}" method="POST">
                 {% csrf_token %}
                 <label for="aluno-user">Username:</label>
@@ -44,7 +100,8 @@
             </form>
         </div>
 
-        <div id="tutor-fields" style="display: none;">
+        <div id="tutor-fields" class="center">
+            <h2>Fill out the attributes</h2>
             <form id="tutor-form" action="{% url 'atlmoodle:registo' %}" method="POST">
                 {% csrf_token %}
                 <label for="tutor-user">User:</label>
@@ -73,7 +130,7 @@
         </div>
     </div>
 
-     <script>
+    <script>
         document.getElementById('model-select').addEventListener('change', function() {
             var selectedModel = this.value;
             var modelFields = document.getElementById('model-fields');
