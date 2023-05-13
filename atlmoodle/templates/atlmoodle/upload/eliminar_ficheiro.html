@@ -1,0 +1,18 @@
+<h1>Escolha a questão a eliminar</h1>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'atlmoodle:eliminar'%}" method="post">
+  {% csrf_token %}
+  {% for ficheiro in ficheiros %}
+    <input type="radio" name="ficheiro" id="ficheiro {{ forloop.counter }}" value="{{ ficheiro.id }}" />
+    <label for="questao{{ forloop.counter }}"> {{ ficheiro.name }} </label>
+    <br />
+  {% endfor %}
+  <br />
+  <input type="submit" value="Eliminar" />
+</form>
+
+<a href="{% url 'atlmoodle:main_page' %}">Voltar ao index</a>

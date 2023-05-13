@@ -42,10 +42,19 @@ class Discussion(models.Model):
         return str(self.forum)
 
 
+TOPIC_CHOICES = (
+    ('testes', 'Testes'),
+    ('visitas', 'Visitas de Estudo'),
+    ('feriados', 'Feriados'),
+    ('greves', 'Greves'),
+    ('ferias', 'Férias'),
+)
+
 class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField('data de publicação')
+    category = models.CharField(max_length=20, choices=TOPIC_CHOICES, default='testes')
 
     def __str__(self):
         return self.name

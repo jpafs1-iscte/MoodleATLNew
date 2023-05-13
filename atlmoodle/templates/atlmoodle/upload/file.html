@@ -6,7 +6,7 @@
     {% if uploaded_files %}
         <ul>
             {% for uploaded_file in uploaded_files %}
-                <li><a href="{{ uploaded_file.file.url }}">{{ uploaded_file.name }}</a></li>
+                <li><a href="{{ uploaded_file.file.url }}" download>{{ uploaded_file.name }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
@@ -14,5 +14,7 @@
     {% endif %}
 
     <a href="{% url 'atlmoodle:fazer_upload' %}"> Dar upload de ficheiro</a>
+    <br/>
+    <a href="{% url 'atlmoodle:eliminar' %}"> Eliminar ficheiros</a>
     </body>
 {% endblock content %}

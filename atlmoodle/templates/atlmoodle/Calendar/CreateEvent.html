@@ -11,6 +11,13 @@
     <label for="description">Descrição: </label>
     <textarea id="description" name="description"></textarea>
     <br/>
+    <label for="id_category">Categoria:</label>
+    <select id="id_category" name="category">
+        {% for choice in topic_choices %}
+            <option value="{{ choice.0 }}" {% if choice.0 == event_category %}selected{% endif %}>{{ choice.1 }}</option>
+        {% endfor %}
+    </select>
+    <br/>
     <input type="submit" value="Criar novo evento">
 </form>
 </body>

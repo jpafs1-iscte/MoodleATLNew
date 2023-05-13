@@ -5,7 +5,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 
 from .forms import CreateInForum, CreateInDiscussion
-from .models import Aluno, Tutor, Event, forum, UploadedFile
+from .models import Aluno, Tutor, Event, forum, UploadedFile, TOPIC_CHOICES
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
@@ -109,26 +109,21 @@ def detalhe(request):
 
 def eliminar(request):
     try:
-        questao_seleccionada = Questao.objects.get(pk=request.POST['questao'])
-    except (KeyError, Questao.DoesNotExist):
+        ficheiro_selecionado = UploadedFile.objects.get(pk=request.POST['ficheiro'])
+    except (KeyError, UploadedFile.DoesNotExist):
         # Apresenta de novo o form para votar
-        questoes = Questao.objects.all()
-        return render(request, 'votacao/eliminarQuestao.html',
-                      {'questoes': questoes, 'error_message': "Não escolheu uma opção", })
+        file = UploadedFile.objects.all()
+        return render(request, 'atlmoodle/upload/eliminar_ficheiro.html',
+                      {'ficheiros': file, 'error_message': "Não escolheu uma opção", })
     else:
-        questao_seleccionada.delete()
-        # Retorne sempre HttpResponseRedirect depois de
-        # tratar os dados POST de um form
-        # pois isso impede os dados de serem tratados
-        # repetidamente se o utilizador
-        # voltar para a página web anterior.
-    return HttpResponseRedirect(reverse('votacao:index'))
+        ficheiro_selecionado.delete()
+    return HttpResponseRedirect(reverse('atlmoodle:main_page'))
 
 def file(request):
     data = {
         "uploaded_files": UploadedFile.objects.all()
     }
-    return render(request, "atlmoodle/Calendar/Calendar.html", data)
+    return render(request, "atlmoodle/upload/file.html", data)
 
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -140,10 +135,10 @@ def fazer_upload(request):
         uploaded_file = UploadedFile(name=name, file=myfile)
         uploaded_file.save()
         uploaded_files = UploadedFile.objects.all()
-        return render(request, 'atlmoodle/fazer_upload.html',
+        return render(request, 'atlmoodle/upload/fazer_upload.html',
                       {'uploaded_file_url': uploaded_file_url,
                        'uploaded_files': uploaded_files})
-    return render(request, 'atlmoodle/fazer_upload.html')
+    return render(request, 'atlmoodle/upload/fazer_upload.html')
 
 
 def teste(request):
@@ -204,13 +199,14 @@ def eventCreator(request):
         try:
             event_name = request.POST.get("name")
             event_description = request.POST.get("description")
+            event_category = request.POST.get("category")
         except KeyError:
-            return render(request, 'atlmoodle/Calendar/CreateEvent.html')
+            return render(request, 'atlmoodle/Calendar/CreateEvent.html', {'topic_choices': TOPIC_CHOICES})
         if event_name and event_description:
-            evento = Event(name=event_name, description=event_description, created_at=timezone.now())
+            evento = Event(name=event_name, description=event_description, created_at=timezone.now(), category=event_category)
             evento.save()
             return HttpResponseRedirect(reverse('atlmoodle:calender_details', args=(evento.id,)))
         else:
             return HttpResponseRedirect(reverse('atlmoodle:eventCreator'))
     else:
-        return render(request, 'atlmoodle/Calendar/CreateEvent.html')
+        return render(request, 'atlmoodle/Calendar/CreateEvent.html', {'topic_choices': TOPIC_CHOICES})
