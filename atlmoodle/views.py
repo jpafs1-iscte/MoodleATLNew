@@ -168,12 +168,7 @@ def addInForum(request):
         if request.user.is_authenticated:
             form = CreateInForum(request.POST)
             if form.is_valid():
-                form.save()
-                return redirect('/')
-        else:
-            form = CreateInForum(request.POST)
-            if form.is_valid():
-                form.save()
+                form.save(user=request.user)
                 return redirect('/')
     context = {'form': form}
     return render(request, 'atlmoodle/forum/addForum.html', context)
@@ -184,7 +179,7 @@ def addInDiscussion(request):
     if request.method == 'POST':
         form = CreateInDiscussion(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(user=request.user)
             return redirect('/')
     context = {'form': form}
     return render(request, 'atlmoodle/forum/discussion.html', context)
