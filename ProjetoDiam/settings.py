@@ -131,6 +131,10 @@ STATICFILES_DIRS=[
     BASE_DIR / 'quizzes/static',
 ]
 
+import os
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'atlmoodle/static/images')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
