@@ -5,7 +5,7 @@
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
-  margin-top: 90px;
+  margin-top: 89px;
   height: 100vh; /* Should be removed. Only for demonstration */
 }
 
