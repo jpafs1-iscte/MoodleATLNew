@@ -33,11 +33,11 @@
         <h5 class="card-title">
             <a><h3>{{forum.topic}}</h3></a>
             <div class="card-body container">
-                <p>{{forum.description}}</p>
+                <p> {{forum.name}} </p>
             </div>
         </h5>
         <hr>
-        <p> By: meter o user que criou o topico</p>
+        <p> By: {{ forum.user.username }}</p>
         <hr>
         <h4>Respostas</h4>
         {%for discuss in discussions%}

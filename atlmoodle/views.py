@@ -5,7 +5,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 
 from .forms import CreateInForum, CreateInDiscussion
-from .models import Aluno, Event, forum
+from .models import Aluno, Tutor, Event, forum
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
@@ -33,8 +33,7 @@ def go_quizzes(request):
 # parte do login
 def registo(request):
     if request.method == 'POST':
-        print(request.POST['useraluno'])
-        if request.POST['useraluno'] != "":
+        if 'useraluno' in request.POST:
             try:
                 nome = request.POST.get('useraluno')
                 primeironome = request.POST.get('primeironome')
@@ -55,8 +54,7 @@ def registo(request):
             else:
 
                 return HttpResponseRedirect(reverse('atlmoodle:main_page'))
-
-        else:
+        elif 'usertutor' in request.POST:
             try:
                 nome = request.POST.get('usertutor')
                 primeironome = request.POST.get('primeironome')
@@ -72,7 +70,7 @@ def registo(request):
             if nome and primeironome and ultimonome and password and anomin and anomax and contacto:
                 user = User.objects.create_user(username=nome, email=contacto, password=password, first_name=primeironome, last_name=ultimonome)
                 user.save()
-                aluno = Aluno.objects.create(user=user, anomin=anomin, anomax=anomax)
+                aluno = Tutor.objects.create(user=user, anos_a_ensinar_min=anomin, anos_a_ensinar_max=anomax)
                 aluno.save()
                 return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
             else:
@@ -159,10 +157,17 @@ def home(request):
 def addInForum(request):
     form = CreateInForum()
     if request.method == 'POST':
-        form = CreateInForum(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
+        if request.user.is_authenticated:
+            forum.objects.create(user=request.user)
+            form = CreateInForum(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = CreateInForum(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
     context = {'form': form}
     return render(request, 'atlmoodle/forum/addForum.html', context)
 
