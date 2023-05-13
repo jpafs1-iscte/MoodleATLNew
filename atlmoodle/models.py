@@ -24,7 +24,7 @@ class Tutor(models.Model):
 
 
 class forum(models.Model):
-  #  user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.CharField(max_length=300, default="")
     topic = models.CharField(max_length=300)
     description = models.TextField(blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
@@ -35,6 +35,7 @@ class forum(models.Model):
 
 # child model
 class Discussion(models.Model):
+    user = models.CharField(max_length=300, default="")
     forum = models.ForeignKey(forum, blank=True, on_delete=models.CASCADE)
     discuss = models.CharField(max_length=1000)
 

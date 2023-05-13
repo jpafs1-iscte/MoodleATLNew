@@ -49,13 +49,18 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 text-white">Overview</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Inventory</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Customers</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Products</a></li>
+                        <li><a href="{% url 'atlmoodle:registo' %}" class="nav-link px-2 link-dark" style="float: right">Registar</a></li>
+                        <li><a href="{% url 'atlmoodle:loginpage' %}" class="nav-link px-2 link-dark" style="float: right">Login</a></li>
+                            {% if request.user.aluno or request.user.tutor %}
+                                <li>
+                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 link-dark" style="float: right">
+                                    Logout
+                                </a>
+                                </li>
+                            {% endif %}
                     </ul>
                     <div>
-                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-white">{{ request.user.first_name }} algo{{ request.user.email }}</a>
+                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-white">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
                     </div>
                 </div>
 
