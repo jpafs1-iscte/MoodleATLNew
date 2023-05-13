@@ -5,7 +5,7 @@
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
-  margin-top: 89px;
+  margin-top: 90px;
   height: 100vh; /* Should be removed. Only for demonstration */
 }
 
@@ -17,12 +17,12 @@
 }
 
 .right {
-  background-color:#bbb;
+  background-color:white;
   width: 83%;
 
 }
 
-.theHeader{
-  background-color: #bbbbbb;
+.theHeader {
+  background-color: #171717;
 
 }
