@@ -43,7 +43,7 @@
 
     {% block header %}
         {% load static %}
-        <header class="p-4 border-bottom theHeader">
+        <header class="p-4 border-bottom ">
 
             {% load static %}
 
@@ -51,26 +51,27 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="{% url 'atlmoodle:registo' %}" class="nav-link px-2 link-dark"
+                        <li><a href="{% url 'atlmoodle:registo' %}" class="nav-link px-2 text-light"
                                style="float: right">Registar</a></li>
-                        <li><a href="{% url 'atlmoodle:loginpage' %}" class="nav-link px-2 link-dark"
+                        <li><a href="{% url 'atlmoodle:loginpage' %}" class="nav-link px-2 text-light"
                                style="float: right">Login</a></li>
                         <li>
-                            <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 link-dark"
+                            <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 text-light"
                                style="float: right">
                                 Logout
                             </a>
                         </li>
-                        {% if request.user.aluno or request.user.tutor %}
+
+                    </ul>
+                </div>
+            {% if request.user.aluno or request.user.tutor %}
                             <div>
                                 <a href="{% url 'atlmoodle:detalhe' %}"
                                    class="nav-link px-2">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
                                 <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 link-dark"
                                    style="float: right">Logout</a>
                             </div>
-                        {% endif %}
-                    </ul>
-                </div>
+            {% endif %}
 
             </div>
 
@@ -108,6 +109,11 @@
                     <li>
                         <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
                             Detalhe?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
+                            Forum
                         </a>
                     </li>
                 </ul>

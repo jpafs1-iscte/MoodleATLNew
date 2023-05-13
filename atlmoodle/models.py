@@ -24,7 +24,7 @@ class Tutor(models.Model):
 
 
 class forum(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+  #  user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     topic = models.CharField(max_length=300)
     description = models.TextField(blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
