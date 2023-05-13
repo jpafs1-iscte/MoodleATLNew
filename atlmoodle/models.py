@@ -15,7 +15,7 @@ class Aluno(models.Model):
 
 
 class Tutor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     anos_a_ensinar_min = models.IntegerField(default=1,validators=[MaxValueValidator(9), MinValueValidator(1)])
     anos_a_ensinar_max = models.IntegerField(default=1,validators=[MaxValueValidator(9), MinValueValidator(1)])
 

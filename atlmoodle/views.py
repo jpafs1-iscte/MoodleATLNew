@@ -156,7 +156,6 @@ def addInForum(request):
     form = CreateInForum()
     if request.method == 'POST':
         if request.user.is_authenticated:
-            forum.objects.create(user=request.user)
             form = CreateInForum(request.POST)
             if form.is_valid():
                 form.save()
