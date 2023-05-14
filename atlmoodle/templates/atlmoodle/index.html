@@ -2,7 +2,6 @@
 <html lang="en">
 
 
-
 <head>
 
     <meta charset="UTF-8">
@@ -11,7 +10,7 @@
             HomePage
         {% endblock title %}
     </title>
-    {%load static%}
+    {% load static %}
 
     {% block scripts %}
 
@@ -19,16 +18,19 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-     <!-- Bootstrap CSS-->
+    <!-- Bootstrap CSS-->
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href = "{% static 'atlmoodle/css/mystyle.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'atlmoodle/css/mystyle.css' %}">
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script >
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
 </head>
@@ -36,114 +38,128 @@
 <body>
 {% load static %}
 {% block header %}
-<div id="colorChange" class="row fixed-top bg-dark" >
+    <div id="colorChange" class="row fixed-top bg-dark">
 
-
+    {% load static %}
+    <header class="p-4 border-bottom ">
 
         {% load static %}
-        <header class="p-4 border-bottom " >
 
-            {% load static %}
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
-            <div class="container" >
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <a href="{% url 'atlmoodle:detalhe' %}"
+                       class="nav-link px-2 text-light">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
 
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-light">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
+                </ul>
+                <div>
+                    {% if request.user.aluno or request.user.tutor %}
 
-                    </ul>
-                    <div>
-                        {% if request.user.aluno or request.user.tutor %}
+                        <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 text-light"
+                           style="float: right">
+                            Logout
+                        </a>
+                        <label>Customiza a tua página</label>
+                        <select id="model-select" name="model">
+                            <option id="cinza">Cinzento</option>
+                            <option id="verde">Verde</option>
+                            <option id="vermelho">Vermelho</option>
+                        </select>
 
-                                <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 text-light" style="float: right">
-                                    Logout
-                                </a>
-                            <button id="butao">Letrinhas</button>
-
-                            {% endif %}
-                    </div>
+                    {% endif %}
                 </div>
-
             </div>
 
+        </div>
 
-        </header>
 
-    {% endblock header %}
+    </header>
+
+{% endblock header %}
 </div>
 
-
-
-
-
-
-
-
 <div class="row">
-    <div class="column left bg-light" >
+    <div class="column left bg-light">
         {% block sidebar %}
-                <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-4">Sidebar</span>
-                    </a>
-                    <hr>
-                    <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item">
-                            <a href="{% url 'atlmoodle:main_page' %}" class="nav-link active" aria-current="page">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link text-white">
-                                Quizzes
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:file' %}" class="nav-link text-white">
-                                Upload de testes
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
-                                Detalhes
-                            </a>
-                        </li>
-                        <li>
-                            </a>
-                            <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
-                                Calendário de Eventos
-                            </a>
-                            <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
-                                Forum
-                            </a>
-                        </li>
-                    </ul>
+            <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-4">Sidebar</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'atlmoodle:main_page' %}" class="nav-link active" aria-current="page">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link text-white">
+                            Quizzes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'atlmoodle:file' %}" class="nav-link text-white">
+                            Upload de testes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
+                            Detalhes
+                        </a>
+                    </li>
+                    <li>
+                        </a>
+                        <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
+                            Calendário de Eventos
+                        </a>
+                        <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
+                            Forum
+                        </a>
+                    </li>
+                </ul>
 
 
-                </div>
+            </div>
 
         {% endblock sidebar %}
     </div>
 
 
-    <div class="column right bg-light" >
+    <div class="column right bg-light">
         {% block content %}
-        <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="rounded mx-auto d-block" style="opacity:0.5;width: inherit; height: inherit;">
+            <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="rounded mx-auto d-block"
+                 style="opacity:0.5;width: inherit; height: inherit;">
         {% endblock content %}
 
     </div>
 </div>
 <script>
-$(document).ready(function(){
-$("#butao").click(function(){
-$("#colorChange").removeClass().addClass("row fixed-top bg-success")
-})
-})
+    $(document).ready(function () {
+        $("#model-select").change(function () {
+            var selectedOption = $(this).children("option:selected").attr("id");
+            var colorClass;
+
+            if (selectedOption === "cinza") {
+                colorClass = "bg-dark";
+            } else if (selectedOption === "verde") {
+                colorClass = "bg-success";
+            } else if (selectedOption === "vermelho") {
+                colorClass = "bg-danger";
+            }
+
+            $("#colorChange").removeClass().addClass("row fixed-top " + colorClass);
+        });
+    });
 </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </body>
 <div class="row">
