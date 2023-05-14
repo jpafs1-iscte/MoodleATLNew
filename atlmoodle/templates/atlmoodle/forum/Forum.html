@@ -58,7 +58,7 @@
 {% endblock sidebar %}
 {% block content %}
 <body>
-<h2 class="jumbotron">
+<h2 class="jumbotron" style="height:170px; ">
     Duvidas Ativas: {{count}}
     <form method="POST" action="{% url 'atlmoodle:addInForum' %}">
         {% csrf_token %}

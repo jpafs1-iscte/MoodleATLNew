@@ -2,54 +2,54 @@
 
 
 {% block sidebar %}
-     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-4">Sidebar</span>
-                    </a>
-                    <hr>
-                    <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item">
-                            <a href="{% url 'atlmoodle:main_page' %}" class="nav-link text-white" aria-current="page" >
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link active" >
-                                Quizzes
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:file' %}" class="nav-link text-white">
-                                Upload de testes
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
-                                Detalhes
-                            </a>
-                        </li>
-                        <li>
-                            </a>
-                            <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
-                                Calendário de Eventos
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
-                                Forum
-                            </a>
-                        </li>
-                    </ul>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">Sidebar</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="{% url 'atlmoodle:main_page' %}" class="nav-link text-white" aria-current="page">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link active">
+                    Quizzes
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:file' %}" class="nav-link text-white">
+                    Upload de testes
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
+                    Detalhes
+                </a>
+            </li>
+            <li>
+                </a>
+                <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
+                    Calendário de Eventos
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
+                    Forum
+                </a>
+            </li>
+        </ul>
 
 
-                </div>
+    </div>
 {% endblock sidebar %}
 
 
 {% block content %}
 
-<body>
- <div class="container">
+    <body>
+    <div class="container">
         <h1>Criar Quiz</h1>
         <form action="{% url 'atlmoodle:quizzes:QuizCreator' %}" method="post">
             {% csrf_token %}
@@ -84,6 +84,6 @@
             <input type="submit" value="Criar Quiz" class="btn btn-primary">
         </form>
     </div>
-</body>
+    </body>
 
 {% endblock content %}
