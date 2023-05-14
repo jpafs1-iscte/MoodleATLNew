@@ -7,7 +7,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('atlmoodle', '0011_discussion_user_alter_forum_user'),
-        ('atlmoodle', '0011_remove_forum_user_event_category'),
     ]
 
     operations = [

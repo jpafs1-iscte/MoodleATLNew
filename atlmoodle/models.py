@@ -2,13 +2,15 @@ import datetime
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
-import datetime
+
 
 
 class Aluno(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=240, default="")
+    last_name = models.CharField(max_length=240, default="")
+    email = models.EmailField(default="")
     anoEscolar = models.IntegerField()
 
     def __str__(self):
