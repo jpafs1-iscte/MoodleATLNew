@@ -49,22 +49,39 @@
 
 {% block content %}
 <body>
+
   <div class="container">
     <h1>Calendário de Eventos</h1>
-
+<div style="border:1px solid black;width:150vh;height:85vh;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
     {% if events %}
     <ul class="list-group">
       {% for e in events %}
-      <li class="list-group-item">
-        <a href="{% url 'atlmoodle:calendar_details' e.id %}">{{ e.name }}</a>
-      </li>
+          <li class="list-group-item">
+
+
+                  <div class="row">
+                      <div class="col-md-12">
+                          <ul class="list-group">
+                              <li class="list-group-item">
+                                  <h1>{{ e.name }}</h1>
+                                  <p>{{ e.description }}</p>
+                                  <p>{{ e.category }}</p>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+
+
+          </li>
       {% endfor %}
     </ul>
+        </div>
     {% else %}
     <p>Não há eventos disponíveis.</p>
     {% endif %}
 
-    <a href="{% url 'atlmoodle:eventCreator' %}" class="btn btn-primary">Criar Evento</a>
+    <a href="{% url 'atlmoodle:eventCreator' %}" class="btn btn-primary mt-3">Criar Evento</a>
   </div>
+
 </body>
 {% endblock content %}

@@ -216,7 +216,7 @@ def eventCreator(request):
         if event_name and event_description:
             evento = Event(name=event_name, description=event_description, created_at=timezone.now(), category=event_category)
             evento.save()
-            return HttpResponseRedirect(reverse('atlmoodle:calendar_details', args=(evento.id,)))
+            return HttpResponseRedirect(reverse('atlmoodle:calendar'))
         else:
             return HttpResponseRedirect(reverse('atlmoodle:eventCreator'))
     else:

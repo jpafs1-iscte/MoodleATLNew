@@ -49,18 +49,17 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="{% url 'atlmoodle:registo' %}" class="nav-link px-2 text-light" style="float: right">Registar</a></li>
-                        <li><a href="{% url 'atlmoodle:loginpage' %}" class="nav-link px-2 text-light" style="float: right">Login</a></li>
-                            {% if request.user.aluno or request.user.tutor %}
-                                <li>
+                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-light">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
+
+                    </ul>
+                    <div>
+                        {% if request.user.aluno or request.user.tutor %}
+
                                 <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 text-light" style="float: right">
                                     Logout
                                 </a>
-                                </li>
+
                             {% endif %}
-                    </ul>
-                    <div>
-                        <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link px-2 text-light">{{ request.user.first_name }} {{ request.user.last_name }}, {{ request.user.email }}</a>
                     </div>
                 </div>
 
@@ -128,8 +127,7 @@
 
     <div class="column right bg-light" >
         {% block content %}
-        <h2>This is Home</h2>
-        <p>Home is a good place </p>
+        <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="rounded mx-auto d-block" style="opacity:0.5;width: inherit; height: inherit;">
         {% endblock content %}
 
     </div>

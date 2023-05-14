@@ -57,7 +57,12 @@
                 <label for="description">Descrição:</label>
                 <textarea id="description" name="description" class="form-control"></textarea>
             </div>
-            <input type="submit" value="Criar novo evento" class="btn btn-primary">
+            <select class="form-control" name="category">
+                {% for choice in topic_choices %}
+                    <option  value="{{ choice.0 }}" {% if choice.0 == event_category %}selected{% endif %}>{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+            <input  type="submit" value="Criar novo evento" class="btn btn-primary mt-3">
         </form>
     </div>
 </body>
