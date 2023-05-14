@@ -58,17 +58,20 @@
 {% endblock sidebar %}
 {% block content %}
 <body>
-<h2 class="jumbotron" style="height:170px; ">
-    Duvidas Ativas: {{count}}
-    <form method="POST" action="{% url 'atlmoodle:addInForum' %}">
-        {% csrf_token %}
-        <button class="btn btn-primary" style="width:fit-content; padding: 4px; margin:10px;">Criar Duvida</button>
-    </form>
-    <form method="POST" action="{% url 'atlmoodle:addInDiscussion' %}">
-            {% csrf_token %}
-            <button class="btn btn-primary" style="width:fit-content; padding: 4px; margin:10px;">Responder</button>
-    </form>
-</h2>
+
+    <h2 class="jumbotron" style="height: 170px;">
+          Duvidas Ativas: {{count}}
+        <div class="col-md-6 d-flex align-items-center justify-content-end">
+                <form method="POST" action="{% url 'atlmoodle:addInForum' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" style="width: fit-content; padding: 4px; margin: 10px;">Criar Duvida</button>
+                </form>
+                <form method="POST" action="{% url 'atlmoodle:addInDiscussion' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" style="width: fit-content; padding: 4px; margin: 10px;">Responder</button>
+                </form>
+            </div>
+    </h2>
 
 
 
