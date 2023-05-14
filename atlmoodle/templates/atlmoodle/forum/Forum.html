@@ -31,7 +31,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'atlmoodle:fazer_upload' %}" class="nav-link text-white">
+                            <a href="{% url 'atlmoodle:file' %}" class="nav-link text-white">
                                 Upload de testes
                             </a>
                         </li>
@@ -62,7 +62,7 @@
     Duvidas Ativas: {{count}}
     <form method="POST" action="{% url 'atlmoodle:addInForum' %}">
         {% csrf_token %}
-        <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Criar Duvida</button>
+        <button class="btn btn-primary" style="width:fit-content; padding: 4px; margin:10px;">Criar Duvida</button>
     </form>
 </h2>
 
@@ -95,7 +95,7 @@
         {%endfor%}
         <form method="POST" action="{% url 'atlmoodle:addInDiscussion' %}">
             {% csrf_token %}
-            <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Responder</button>
+            <button class="btn btn-primary" style="width:fit-content; padding: 4px; margin:10px;">Responder</button>
         </form>
     </div>
 

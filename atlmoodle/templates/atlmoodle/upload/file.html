@@ -1,24 +1,73 @@
 {% extends "atlmoodle/index.html" %}
 {% load static %}
-{% block content %}
-    <body>
-    <h1> Ficheiros</h1>
-    {% if uploaded_files %}
-        <ul>
-            {% for uploaded_file in uploaded_files %}
-                <li>
-                    <a href="{{ uploaded_file.file.url }}" download>{{ uploaded_file.titulo }}</a><br>
-                    <a>Autor: {{ uploaded_file.autor }}, {{ uploaded_file.name }}</a><br>
-                    <a>Descrição do ficheiro: {{ uploaded_file.evento }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Nao ha ficheiros disponiveis.</p>
-    {% endif %}
 
-    <a href="{% url 'atlmoodle:fazer_upload' %}"> Dar upload de ficheiro</a>
-    <br/>
-    <a href="{% url 'atlmoodle:eliminar' %}"> Eliminar ficheiros</a>
-    </body>
+{% block sidebar %}
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">Sidebar</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="{% url 'atlmoodle:main_page' %}" class="nav-link text-white" aria-current="page">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="nav-link text-white">
+                    Quizzes
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:file' %}" class="nav-link active">
+                    Upload de testes
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:detalhe' %}" class="nav-link text-white">
+                    Detalhes
+                </a>
+            </li>
+            <li>
+                </a>
+                <a href="{% url 'atlmoodle:calendar' %}" class="nav-link text-white">
+                    Calendário de Eventos
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'atlmoodle:home' %}" class="nav-link text-white">
+                    Forum
+                </a>
+            </li>
+        </ul>
+
+
+    </div>
+{% endblock sidebar %}
+
+{% block content %}
+ <body>
+    <div class="container">
+        <h1>Ficheiros</h1>
+        {% if uploaded_files %}
+            <ul class="list-group">
+                {% for uploaded_file in uploaded_files %}
+                    <li class="list-group-item">
+                        <a href="{{ uploaded_file.file.url }}" download>{{ uploaded_file.titulo }}</a><br>
+                        <small>Autor: {{ uploaded_file.autor }}, {{ uploaded_file.name }}</small><br>
+                        <small>Descrição do ficheiro: {{ uploaded_file.evento }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Não há ficheiros disponíveis.</p>
+        {% endif %}
+
+        <a href="{% url 'atlmoodle:fazer_upload' %}" class="btn btn-primary mt-3">Dar upload de ficheiro</a>
+        <br/>
+        <a href="{% url 'atlmoodle:eliminar' %}" class="btn btn-danger mt-3">Eliminar ficheiros</a>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
 {% endblock content %}

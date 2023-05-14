@@ -50,9 +50,9 @@ def registo(request):
                 return render(request, 'atlmoodle/registerpage.html')
 
             if nome and primeironome and ultimonome and password and ano and contacto:
-                user = User.objects.create_user(username=nome, password=password)
+                user = User.objects.create_user(username=nome, password=password, email=contacto, first_name=primeironome, last_name=ultimonome)
                 user.save()
-                aluno = Aluno.objects.create(user=user, email=contacto, first_name=primeironome, last_name=ultimonome, anoEscolar=ano)
+                aluno = Aluno.objects.create(user=user, first_name=primeironome, last_name=ultimonome, email=contacto, anoEscolar=ano)
                 aluno.save()
                 return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
             else:

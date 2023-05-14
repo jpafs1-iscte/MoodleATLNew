@@ -10,7 +10,8 @@ urlpatterns = [
     # path('', atlmoodle.views.main_page, name='main_page'),
     # path('go_quizzes', include('quizzes.urls', namespace='quizzes')),
 
-    path('', atlmoodle.views.main_page, name='main_page'),
+    path('', atlmoodle.views.loginpage, name='loginpage'),
+    path('main_page', atlmoodle.views.main_page, name='main_page'),
     path('go_quizzes', include('quizzes.urls', namespace='quizzes')),
     path('registo', atlmoodle.views.registo, name="registo"),
     path('eliminar', atlmoodle.views.eliminar, name='eliminar'),

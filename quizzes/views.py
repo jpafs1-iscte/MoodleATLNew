@@ -33,6 +33,8 @@ def quiz_data_view(request, pk):
 def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
+
+
 def save_quiz_view(request, pk):
     if is_ajax(request):
         questions = []
