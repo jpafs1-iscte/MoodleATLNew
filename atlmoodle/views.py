@@ -177,7 +177,7 @@ def addInForum(request):
             form = CreateInForum(request.POST)
             if form.is_valid():
                 form.save(user=request.user)
-                return redirect('/')
+                return HttpResponseRedirect(reverse('atlmoodle:home'))
     context = {'form': form}
     return render(request, 'atlmoodle/forum/addForum.html', context)
 
@@ -188,7 +188,7 @@ def addInDiscussion(request):
         form = CreateInDiscussion(request.POST)
         if form.is_valid():
             form.save(user=request.user)
-            return redirect('/')
+            return HttpResponseRedirect(reverse('atlmoodle:home'))
     context = {'form': form}
     return render(request, 'atlmoodle/forum/discussion.html', context)
 
