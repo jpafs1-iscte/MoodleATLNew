@@ -91,14 +91,15 @@
             </div>
         </h5>
         <hr>
-        <p> By: {{ forum.user }}</p>
+        <p> Autor: {{ forum.user }}</p>
         <hr>
         <h4>Respostas</h4>
         {%for discuss in discussions%}
             {%for objs in discuss%}
                 {% if objs.forum == forum %}
-                    {{objs.discuss}}
                     <br>
+                    {{objs.discuss}}<br>
+                    {{ objs.discuss.user }}
                 {% endif %}
             {%endfor%}
         {%endfor%}

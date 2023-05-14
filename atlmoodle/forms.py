@@ -19,4 +19,12 @@ class CreateInForum(ModelForm):
 class CreateInDiscussion(ModelForm):
     class Meta:
         model = Discussion
-        fields = "__all__"
+        fields = ['forum', 'discuss']
+
+    def save(self, commit=True, user=None):
+        instance = super().save(commit=False)
+        if user:
+            instance.user = user.username
+        if commit:
+            instance.save()
+        return instance
