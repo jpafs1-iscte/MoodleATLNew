@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse
+
 from .models import Quizz
 from django.views.generic import ListView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from questions.models import Question, Answer
 from results.models import Result
 
@@ -30,9 +32,40 @@ def quiz_data_view(request, pk):
         'data': questions,
         'time': quiz.time,
     })
+
+
 def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
+
+def create_quiz(request):
+    return render(request, 'quizzes/Create_Quiz.html')
+
+
+def main_view(request):
+    return render(request, 'quizzes/main.html')
+
+
+def QuizCreator(request):
+    if request.method == 'POST':
+        try:
+            Quiz_name = request.POST.get("name")
+            Quiz_topic = request.POST.get("topic")
+            Quiz_number_of_questions = request.POST.get("number_of_questions")
+            Quiz_time = request.POST.get("time")
+            Quiz_score_to_pass = request.POST.get("score_to_pass")
+            Quiz_diff = request.POST.get("diff")
+        except KeyError:
+            return render(request, 'atlmoodle:create_quiz')
+        if Quiz_name and Quiz_topic and Quiz_number_of_questions and Quiz_time and Quiz_score_to_pass and Quiz_diff:
+            Quiz = Quizz(name=Quiz_name, topic=Quiz_topic, number_of_questions=Quiz_number_of_questions, time=Quiz_time,
+                         score_to_pass=Quiz_score_to_pass, diff=Quiz_diff)
+            Quiz.save()
+            return HttpResponseRedirect(reverse('atlmoodle:quizzes:main-view'))
+        else:
+            return HttpResponseRedirect(reverse('atlmoodle:quizzes:create_quiz'))
+    else:
+        return render(request, 'quizzes/main.html')
 
 
 def save_quiz_view(request, pk):
