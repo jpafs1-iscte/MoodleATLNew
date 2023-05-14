@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 import datetime
 
+
 class Aluno(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     anoEscolar = models.IntegerField()
@@ -15,7 +16,7 @@ class Aluno(models.Model):
 
 
 class Tutor(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default="")
     anos_a_ensinar_min = models.IntegerField(default=1,validators=[MaxValueValidator(9), MinValueValidator(1)])
     anos_a_ensinar_max = models.IntegerField(default=1,validators=[MaxValueValidator(9), MinValueValidator(1)])
 
@@ -51,6 +52,7 @@ TOPIC_CHOICES = (
     ('ferias', 'Férias'),
 )
 
+
 class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
@@ -62,7 +64,10 @@ class Event(models.Model):
 
 
 class UploadedFile(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, default="")
+    titulo = models.CharField(max_length=255, default="")
+    autor = models.CharField(max_length=255, default="")
+    evento = models.CharField(max_length=255, default="")
     file = models.FileField(upload_to='uploads/')
 
     def __str__(self):

@@ -6,7 +6,11 @@
     {% if uploaded_files %}
         <ul>
             {% for uploaded_file in uploaded_files %}
-                <li><a href="{{ uploaded_file.file.url }}" download>{{ uploaded_file.name }}</a></li>
+                <li>
+                    <a href="{{ uploaded_file.file.url }}" download>{{ uploaded_file.titulo }}</a><br>
+                    <a>Autor: {{ uploaded_file.autor }}, {{ uploaded_file.name }}</a><br>
+                    <a>Descrição do ficheiro: {{ uploaded_file.evento }}</a>
+                </li>
             {% endfor %}
         </ul>
     {% else %}

@@ -119,11 +119,13 @@ def eliminar(request):
         ficheiro_selecionado.delete()
     return HttpResponseRedirect(reverse('atlmoodle:main_page'))
 
+
 def file(request):
     data = {
         "uploaded_files": UploadedFile.objects.all()
     }
     return render(request, "atlmoodle/upload/file.html", data)
+
 
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -131,8 +133,14 @@ def fazer_upload(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
-        name = request.POST.get('name')
-        uploaded_file = UploadedFile(name=name, file=myfile)
+        evento = request.POST.get('evento')
+        titulo = request.POST.get('titulo')
+        nome = request.user.first_name + request.user.last_name
+        if request.user == Aluno:
+            autor = "Aluno"
+        else:
+            autor = "Tutor"
+        uploaded_file = UploadedFile(evento=evento, file=myfile, name=nome, autor=autor, titulo=titulo)
         uploaded_file.save()
         uploaded_files = UploadedFile.objects.all()
         return render(request, 'atlmoodle/upload/fazer_upload.html',
@@ -143,6 +151,7 @@ def fazer_upload(request):
 
 def teste(request):
     return render(request, 'atlmoodle/teste.html')
+
 
 def home(request):
     forums = forum.objects.all()
@@ -179,15 +188,18 @@ def addInDiscussion(request):
     context = {'form': form}
     return render(request, 'atlmoodle/forum/discussion.html', context)
 
+
 def calendar(request):
     data = {
         "events": Event.objects.all,
     }
     return render(request, "atlmoodle/Calendar/Calendar.html", data)
 
+
 def calendar_details(request, event_id):
     evento = get_object_or_404(Event, pk=event_id)
     return render(request, 'atlmoodle/Calendar/CalendarDetails.html', {'evento': evento})
+
 
 def eventCreator(request):
     if request.method == 'POST':
@@ -200,7 +212,7 @@ def eventCreator(request):
         if event_name and event_description:
             evento = Event(name=event_name, description=event_description, created_at=timezone.now(), category=event_category)
             evento.save()
-            return HttpResponseRedirect(reverse('atlmoodle:calender_details', args=(evento.id,)))
+            return HttpResponseRedirect(reverse('atlmoodle:calendar_details', args=(evento.id,)))
         else:
             return HttpResponseRedirect(reverse('atlmoodle:eventCreator'))
     else:
