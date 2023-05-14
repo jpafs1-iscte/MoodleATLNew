@@ -1,16 +1,7 @@
 {% extends "atlmoodle/index.html" %}
-{% load static %}
 
-{% block scripts %}
-    <script src="{% static 'quizzes/quiz.js' %}" defer></script>
-{% endblock scripts %}
-
-
-{% block title %}
-    {{ obj.name }}
-{% endblock title %}
 {% block sidebar %}
-      <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
+     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
                     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-4">Sidebar</span>
                     </a>
@@ -53,29 +44,33 @@
                 </div>
 {% endblock sidebar %}
 
+
 {% block content %}
 
-<div class="row">
-    <div class="col">
-        <b>{{obj.name}}</b>
-        <p>score to pass: {{obj.score_to_pass}}%</p>
+<body>
+ <div class="container">
+        <h1>Criar Questão</h1>
+        <form action="{% url 'atlmoodle:quizzes:QuestionCreator' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="question">Pergunta:</label>
+                <input id="question" type="text" name="question" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="quiz">Quiz:</label>
+
+                <select id="quiz" name="quiz" class="form-control">
+                    {% for quiz in quizes %}
+                        <option value="quiz.name">{{ quiz.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" value="Criar Pergunta" class="btn btn-primary">
+        </form>
     </div>
-    <div class="col text-right" id="timer-box"></div>
-</div>
-
-    <a href="{% url 'atlmoodle:quizzes:main-view' %}" class="btn btn-danger">go back</a>
-
-
-
-    <form id="quiz-form" class="mt-3 mb-3">
-    {% csrf_token %}
-    <div id="quiz-box"></div>
-    <button type="submit" class="btn btn-primary mt-3">save</button>
-</form>
-
-
-<div id="score-box"></div>
-<div id="result-box"></div>
-
+</body>
 
 {% endblock content %}
+
+
+

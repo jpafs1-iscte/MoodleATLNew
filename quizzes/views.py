@@ -46,6 +46,11 @@ def main_view(request):
     return render(request, 'quizzes/main.html')
 
 
+def create_question(request):
+    data={"quizes":Quizz.objects.all()}
+    return render(request, 'quizzes/Create_question.html',data)
+
+
 def QuizCreator(request):
     if request.method == 'POST':
         try:
@@ -66,6 +71,26 @@ def QuizCreator(request):
             return HttpResponseRedirect(reverse('atlmoodle:quizzes:create_quiz'))
     else:
         return render(request, 'quizzes/main.html')
+
+def QuestionCreator(request):
+    if request.method == 'POST':
+        try:
+            Question_text = request.POST.get("question")
+            Question_quiz = request.POST.get("quiz")
+
+
+        except KeyError:
+            return render(request, 'atlmoodle:create_quiz')
+        if Question_text and Question_quiz:
+            question = Question(text=Question_text, quizz=Question_quiz)
+            Quiz.save()
+            return HttpResponseRedirect(reverse('atlmoodle:quizzes:main-view'))
+        else:
+            return HttpResponseRedirect(reverse('atlmoodle:quizzes:create_quiz'))
+    else:
+        return render(request, 'quizzes/main.html')
+
+
 
 
 def save_quiz_view(request, pk):
