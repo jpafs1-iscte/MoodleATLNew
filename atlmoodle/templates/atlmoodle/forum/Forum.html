@@ -64,7 +64,13 @@
         {% csrf_token %}
         <button class="btn btn-primary" style="width:fit-content; padding: 4px; margin:10px;">Criar Duvida</button>
     </form>
+    <form method="POST" action="{% url 'atlmoodle:addInDiscussion' %}">
+            {% csrf_token %}
+            <button class="btn btn-primary" style="width:fit-content; padding: 4px; margin:10px;">Responder</button>
+    </form>
 </h2>
+
+
 
 <div style="border:1px solid black;width:150vh;height:60vh;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
 
@@ -93,10 +99,7 @@
                 {% endif %}
             {%endfor%}
         {%endfor%}
-        <form method="POST" action="{% url 'atlmoodle:addInDiscussion' %}">
-            {% csrf_token %}
-            <button class="btn btn-primary" style="width:fit-content; padding: 4px; margin:10px;">Responder</button>
-        </form>
+
     </div>
 
     <br>

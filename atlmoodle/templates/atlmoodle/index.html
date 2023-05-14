@@ -35,11 +35,11 @@
 
 <body>
 {% load static %}
+{% block header %}
+<div id="colorChange" class="row fixed-top bg-dark" >
 
-<div class="row fixed-top bg-dark" >
 
 
-    {% block header %}
         {% load static %}
         <header class="p-4 border-bottom " >
 
@@ -58,6 +58,7 @@
                                 <a href="{% url 'atlmoodle:logoutview' %}" class="nav-link px-2 text-light" style="float: right">
                                     Logout
                                 </a>
+                            <button id="butao">Letrinhas</button>
 
                             {% endif %}
                     </div>
@@ -132,6 +133,15 @@
 
     </div>
 </div>
+<script>
+$(document).ready(function(){
+$("#butao").click(function(){
+$("#colorChange").removeClass().addClass("row fixed-top bg-success")
+})
+})
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
