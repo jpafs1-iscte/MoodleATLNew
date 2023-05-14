@@ -104,7 +104,7 @@ def loginpage(request):
 
 def logoutview(request):
     logout(request)
-    return HttpResponseRedirect(reverse('atlmoodle:main_page'))
+    return HttpResponseRedirect(reverse('atlmoodle:loginpage'))
 
 
 def detalhe(request):
