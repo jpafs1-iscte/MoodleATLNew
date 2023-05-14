@@ -80,8 +80,8 @@
 
 <div class="h1">Quiz List</div>
 <a href="{% url 'atlmoodle:quizzes:create_quiz' %}" class="btn btn-primary mt-3">Criar Quiz</a>
-    <a href="{% url 'atlmoodle:quizzes:create_question' %}" class="btn btn-primary  ">Criar Pergunta</a>
-    <!--a href="{#% url 'atlmoodle:quizzes:create_response' %#}" class="btn btn-primary  ">Criar Resposta</a-->
+    <a href="{% url 'atlmoodle:quizzes:create_question' %}" class="btn btn-primary mt-3 ">Criar Pergunta</a>
+    <a href="{% url 'atlmoodle:quizzes:create_response' %}" class="btn btn-primary mt-3 ">Criar Resposta</a>
 
 <hr>
 {% for obj in object_list %}

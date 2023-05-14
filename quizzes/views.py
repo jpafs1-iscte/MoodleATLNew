@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from .models import Quizz
@@ -47,8 +47,13 @@ def main_view(request):
 
 
 def create_question(request):
-    data={"quizes":Quizz.objects.all()}
-    return render(request, 'quizzes/Create_question.html',data)
+    data = {'quizes': Quizz.objects.all()}
+    return render(request, 'quizzes/Create_question.html', data)
+
+
+def create_response(request):
+    data = {'questions': Question.objects.all()}
+    return render(request, 'quizzes/Create_response.html', data)
 
 
 def QuizCreator(request):
@@ -72,25 +77,50 @@ def QuizCreator(request):
     else:
         return render(request, 'quizzes/main.html')
 
+
 def QuestionCreator(request):
     if request.method == 'POST':
         try:
             Question_text = request.POST.get("question")
             Question_quiz = request.POST.get("quiz")
 
-
+            quiz = get_object_or_404(Quizz, id=Question_quiz)
         except KeyError:
-            return render(request, 'atlmoodle:create_quiz')
-        if Question_text and Question_quiz:
-            question = Question(text=Question_text, quizz=Question_quiz)
-            Quiz.save()
+            return render(request, 'atlmoodle:create_question')
+
+        if Question_text and quiz:
+            question = Question(text=Question_text, quizz=quiz)
+            question.save()
             return HttpResponseRedirect(reverse('atlmoodle:quizzes:main-view'))
         else:
-            return HttpResponseRedirect(reverse('atlmoodle:quizzes:create_quiz'))
+            return HttpResponseRedirect(reverse('atlmoodle:quizzes:create_question'))
     else:
         return render(request, 'quizzes/main.html')
 
 
+def ResponseCreator(request):
+    if request.method == 'POST':
+        try:
+            Answer_text = request.POST.get("response")
+            Answer_questions = request.POST.get("question")
+            Answer_correct = request.POST.get("correct")
+            if(Answer_correct == "on"):
+                Answer_correct=True
+            else:
+                Answer_correct=False
+
+            question = get_object_or_404(Question, id=Answer_questions)
+        except KeyError:
+            return render(request, 'atlmoodle:create_answer')
+
+        if question and Answer_text:
+            answer = Answer(text=Answer_text,question=question,correct=Answer_correct)
+            answer.save()
+            return HttpResponseRedirect(reverse('atlmoodle:quizzes:main-view'))
+        else:
+            return HttpResponseRedirect(reverse('atlmoodle:quizzes:create_response'))
+    else:
+        return render(request, 'quizzes/main.html')
 
 
 def save_quiz_view(request, pk):

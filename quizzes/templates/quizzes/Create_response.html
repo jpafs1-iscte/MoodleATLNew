@@ -1,5 +1,6 @@
 {% extends "atlmoodle/index.html" %}
 
+
 {% block sidebar %}
      <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 100%; height: inherit">
                     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -49,27 +50,33 @@
 
 <body>
  <div class="container">
-        <h1>Criar Questão</h1>
-        <form action="{% url 'atlmoodle:quizzes:QuestionCreator' %}" method="post">
+        <h1>Criar Quiz</h1>
+        <form action="{% url 'atlmoodle:quizzes:ResponseCreator' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="question">Pergunta:</label>
-                <input id="question" type="text" name="question" class="form-control">
+                <label for="response">Resposta:</label>
+                <input id="response" type="text" name="response" class="form-control">
             </div>
             <div class="form-group">
-                <label for="quiz">Quiz:</label>
-                <select id="quiz" name="quiz" class="form-control">
-                    {% for quiz in quizes %}
-                        <option value= {{ quiz.id }} >{{ quiz }}</option>
+                <label for="question">Quiz:</label>
+                <select id="question" name="question" class="form-control">
+                    {% for question in questions %}
+                        <option value= {{ question.id }} >{{ question }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <input type="submit" value="Criar Pergunta" class="btn btn-primary">
+            <div class="container mb-3">
+                <div class="form-check">
+
+                    <input class="form-check-input" type="checkbox" id="correct" name="correct">
+                    <label class="form-check-label" for="correct">
+                        Está correto?
+                    </label>
+                </div>
+            </div>
+            <input type="submit" value="Criar Quiz" class="btn btn-primary">
         </form>
     </div>
 </body>
 
 {% endblock content %}
-
-
-
