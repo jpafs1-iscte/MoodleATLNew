@@ -46,6 +46,9 @@ def registo(request):
                 ano = request.POST.get('anoEscolar')
                 contacto = request.POST.get('contacto')
 
+                if User.objects.filter(username=nome).exists():
+                    return render(request, 'atlmoodle/registerpage.html')
+
             except KeyError:
                 return render(request, 'atlmoodle/registerpage.html')
 
@@ -67,6 +70,9 @@ def registo(request):
                 anomin = request.POST.get('anos_a_ensinar_min')
                 anomax = request.POST.get('anos_a_ensinar_max')
                 contacto = request.POST.get('contacto')
+
+                if User.objects.filter(username=nome).exists():
+                    return render(request, 'atlmoodle/registerpage.html')
 
             except KeyError:
                 return render(request, 'atlmoodle/registerpage.html')
